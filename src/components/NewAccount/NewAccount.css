@@ -1,0 +1,43 @@
+.NewAccount {
+    width: 80%;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    text-align: center;
+}
+
+.NewAccount label {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.NewAccount input,
+.NewAccount textarea,
+.NewAccount select {
+    display: block;
+    width: 80%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    outline: none;
+    font: inherit;
+    margin: auto;
+}
+
+.NewAccount button {
+    margin: 5px 0;
+    padding: 10px;
+    font: inherit;
+    border: 1px solid lightcoral;
+    background-color: transparent;
+    color: lightcoral;
+    cursor: pointer;
+}
+
+.NewAccount button:hover,
+.NewAccount button:active {
+    color: white;
+    background-color: lightcoral;
+}
