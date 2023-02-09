@@ -1,11 +1,11 @@
 import axios from "axios";
 import {OWNER_URL} from "../../constants/endpoints";
-import {getAuthHeader, isTokenExpired, logoutAuthState} from "../AuthServices/Auth";
 import {useContext, useEffect, useState} from "react";
 import Owner from "./Owner";
 import List from "@mui/material/List";
 import {useNavigate} from "react-router";
 import {CurrentUserContext} from "../../Context/CurrentUserContext";
+import {requestReviewOwners, responseReviewOwners} from "../../Apis/owners-api-interceptors";
 
 const ReviewOwner = () => {
 
@@ -16,22 +16,23 @@ const ReviewOwner = () => {
 
 
     const fetchAllOwners = () => {
+        const axiosInstance = axios.create({
+            baseURL: OWNER_URL,
+        });
 
-        if (!isTokenExpired(token, setCurrentUser)) {
-            axios.get(OWNER_URL, {headers: getAuthHeader(token)})
-                .then(response => {
-                    setOwners(response.data);
-                    console.log(response.data)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        } else {
-            logoutAuthState(setCurrentUser);
-            return navigate('/');
-        }
+        axiosInstance.interceptors.request.use((config) => requestReviewOwners(config, token));
 
-    }
+        axiosInstance.interceptors.response.use((response) => response, (error) => responseReviewOwners(error, setCurrentUser, navigate));
+
+        axiosInstance.get().then((response) => {
+            setOwners(response.data);
+            console.log(response.data);
+        }, (error) => {
+            console.log(error);
+        });
+
+    };
+
 
     useEffect(fetchAllOwners, []);
 
