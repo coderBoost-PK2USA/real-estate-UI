@@ -1,5 +1,5 @@
 .NewAccount {
-    width: 80%;
+    width: 60%;
     margin: 20px auto;
     padding: 10px;
     border: 1px solid #eee;
@@ -18,7 +18,7 @@
 .NewAccount textarea,
 .NewAccount select {
     display: block;
-    width: 80%;
+    width: 60%;
     box-sizing: border-box;
     border: 1px solid black;
     outline: none;
