@@ -2,8 +2,7 @@ import './Header.css'
 import {Link} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {CurrentUserContext} from "../../Context/CurrentUserContext";
-import jwt_decode from "jwt-decode";
-import auth, {handleLogout, initializeAuthState, isUserRole, logoutAuthState} from "../AuthServices/Auth";
+import {initializeAuthState, isUserRole, logoutAuthState} from "../AuthServices/Auth";
 import {useNavigate} from "react-router";
 
 const Header = () => {
@@ -34,7 +33,7 @@ const Header = () => {
                         <li><Link to="/review-owners">Review Owners</Link></li>)}
 
                     {isUserRole(currentUser, "OWNER") && (
-                        <li><Link to="/">Offers</Link></li>)}
+                        <li><Link to="/property-offers">Offers</Link></li>)}
 
                     <li onClick={handleLogout}><Link to="#">Logout</Link></li>
 
