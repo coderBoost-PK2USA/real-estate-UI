@@ -11,7 +11,7 @@ function Home() {
         <>
             <CurrentUserContext.Provider value={[currentUser, setCurrentUser]}>
                 <Header/>
-                <div className="App-header">
+                <div className="container">
                     <PageRoutes/>
                 </div>
             </CurrentUserContext.Provider>

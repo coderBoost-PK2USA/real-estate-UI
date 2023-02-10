@@ -1,13 +1,13 @@
 import axios from "axios";
-import {OWNER_URL} from "../../constants/endpoints";
+import {OWNER_URL} from "../../../constants/endpoints";
 import {useContext, useEffect, useState} from "react";
 import Owner from "./Owner";
 import List from "@mui/material/List";
 import {useNavigate} from "react-router";
-import {CurrentUserContext} from "../../Context/CurrentUserContext";
-import {requestReviewOwners, responseReviewOwners} from "../../Apis/owners-api-interceptors";
+import {CurrentUserContext} from "../../../Context/CurrentUserContext";
+import {requestInterceptor, responseReviewOwners} from "../../../Apis/owners-api-interceptors";
 
-const ReviewOwner = () => {
+const ReviewOwnerList = () => {
 
     const [owners, setOwners] = useState([]);
     const token = localStorage.getItem("token");
@@ -20,7 +20,7 @@ const ReviewOwner = () => {
             baseURL: OWNER_URL,
         });
 
-        axiosInstance.interceptors.request.use((config) => requestReviewOwners(config, token));
+        axiosInstance.interceptors.request.use((config) => requestInterceptor(config, token));
 
         axiosInstance.interceptors.response.use((response) => response, (error) => responseReviewOwners(error, setCurrentUser, navigate));
 
@@ -37,32 +37,40 @@ const ReviewOwner = () => {
     useEffect(fetchAllOwners, []);
 
 
+    let sr=0;
     const ownerListUI = owners.map(o => {
         return <>
-            <div>
+            <>
                 <Owner
                     id={o.id}
+                    sr={++sr}
                     name={o.name}
                     status={o.status}
                     st={o.street}
-                    state={o.state}
+                    statee={o.state}
                     zipcode={o.zipCode}
-                    lat={o.latitude}
-                    lon={o.longitude}
 
-                >
-                </Owner>
-            </div>
+                />
+            </>
         </>
     });
 
 
-    return <div>
+    return <div class="review-owner">
         Review Owner
-        <List sx={{width: '100%', maxWidth: 360, color: 'background.paper'}}>
-            {ownerListUI}
-        </List>
+            <div className="table" id="results">
+                <div className='theader'>
+                    <div className='table_header'>Sr.</div>
+                    <div className='table_header'>Name</div>
+                    <div className='table_header'>Address</div>
+                    <div className='table_header'>Status</div>
+                    <div className='table_header'>Actions</div>
+                    <div className='table_header'>Contact</div>
+                </div>
+
+                {ownerListUI}
+            </div>
     </div>;
 }
 
-export default ReviewOwner;
+export default ReviewOwnerList;

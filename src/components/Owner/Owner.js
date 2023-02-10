@@ -1,31 +1,20 @@
-import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import ImageIcon from '@mui/icons-material/Image';
-import WorkIcon from '@mui/icons-material/Work';
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
-import {Badge} from "@mui/material";
+import "./ReviewOwner/OwnerReview.css"
+import {useState} from "react";
 
-export default function Owner(props) {
-    return (
-        <ListItem key={props.id}>
-            <ListItemAvatar>
-                <Avatar>
-                    <ImageIcon/>
-                </Avatar>
-            </ListItemAvatar>
-            <p>{"NAME: " + props.name + " "} </p>
-            <p>{"Address: " + props.st + " "} </p>
-            <p>{props.state + " "} </p>
-            <p>{props.zipcode + " "} </p>
+function Owner(props) {
 
-            <Badge style={{"padding": "10%"}} color="secondary" overlap="circular" badgeContent=" " variant="dot">
-                {props.status}
-            </Badge>
-        </ListItem>
+    const [isActive, setIsActive] = useState(false);
 
-    );
+    const handleIsActiveBtn = () => {
+        setIsActive(!isActive);
+    }
+
+
+    return (<div className="img-div">
+        <img src="https://miro.medium.com/proxy/0*pAdZLfSqNrMZAAPA.jpg"/>
+        <h1>{props.name}</h1>
+        <input type="button" value={isActive ? "Enabled" : "Disabled"} onClick={handleIsActiveBtn}/>
+    </div>);
 }
+
+export default Owner;
