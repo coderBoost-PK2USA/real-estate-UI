@@ -30,10 +30,17 @@ const Header = () => {
 
                     {/*  TABS BASED ON ROLES */}
                     {isUserRole(currentUser, "ADMIN") && (
-                        <li><Link to="/review-owners">Review Owners</Link></li>)}
+                        <li><Link to="/review-owners">Review Owners</Link></li>
+                    )}
 
-                    {isUserRole(currentUser, "OWNER") && (
-                        <li><Link to="/property-offers">Offers</Link></li>)}
+                    {isUserRole(currentUser, "OWNER") &&
+                        (<>
+                                <li><Link to="/add-property">Add New Property</Link></li>
+                                <li><Link to="/property-offers">Offers</Link></li>
+
+                            </>
+                        )
+                    }
 
                     <li onClick={handleLogout}><Link to="#">Logout</Link></li>
 

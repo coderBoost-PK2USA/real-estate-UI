@@ -21,7 +21,7 @@ export const logoutAuthState = (setCurrentUser) => {
     setCurrentUser([]);
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
-
+    localStorage.removeItem("ownerId")
 }
 
 
