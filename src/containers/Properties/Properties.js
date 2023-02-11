@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {initializeAuthState, isUserRole} from "../../components/AuthServices/Auth";
 import OwnerProperties from "./OwnerProperties";
+import CustomerProperties from "./CustomerProperties";
 
 function Properties() {
 
@@ -19,7 +20,7 @@ function Properties() {
     } else if (isUserRole(user, "OWNER")) {
         component = <OwnerProperties/>
     } else {
-        component = <h1>DEFAULT</h1>
+        component = <CustomerProperties/>
     }
 
     return (
