@@ -46,7 +46,7 @@ const AdminDashboard = () => {
         <div className="Stats">
 
 
-            <div className="Content">
+            <div className="AdminContent">
                 <Link to={`#`}><Statistics name="Properties" count={statistics.properties}/></Link>
             </div>
             <div className="Content">

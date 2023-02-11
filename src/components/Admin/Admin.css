@@ -12,8 +12,7 @@ code {
     monospace;
 }
 
-.Content {
-
+.AdminContent {
     text-align: center;
     border: 2px solid lightcoral;
     box-shadow: 0 2px 3px #ccc;
@@ -27,8 +26,8 @@ code {
 
 }
 
-.Content:hover,
-.Content:active {
+.AdminContent:hover,
+.AdminContent:active {
     background-color: lightcoral;
     color: #282c34;
 }
@@ -41,6 +40,6 @@ code {
     margin: auto;
 }
 
-.Stats h1{
+.Stats h1 {
     color: white;
 }

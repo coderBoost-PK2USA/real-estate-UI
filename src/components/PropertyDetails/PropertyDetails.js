@@ -8,6 +8,7 @@ import {getAuthHeader, initializeAuthState, isTokenExpired, isUserRole, logoutAu
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import UserDetails from "../UserDetails/UserDetails";
 
 function PropertyDetails() {
 
@@ -23,31 +24,31 @@ function PropertyDetails() {
 
 
     const fetchPropertyById = () => {
-
         axios.get(`${PROPERTY_URL}/${propertyId}`, {headers: {"Authorization": `Bearer ${token}`}})
             .then(response => setPropertyDetails(response.data))
             .catch(error => console.log("Error while fetching property details, error = " + error.message))
     }
 
     useEffect(() => {
-            initializeAuthState(token, setIsLogin, setUser);
-
-            fetchPropertyById();
-        }
-
-        , [propertyId])
+        initializeAuthState(token, setIsLogin, setUser);
+        fetchPropertyById();
+    }, [propertyId, token])
 
     const handleManageOffers = () => {
-        navigate(`/manage-property/${propertyId}/offers`)
+        navigate(`/manage-property/${propertyId}/offers`, {state: {propertyStatus: propertyDetails.status}})
     }
 
-    const deleteEmployeeById = () => {
+    const deletePropertyById = () => {
         axios.delete(`${PROPERTY_URL}/${propertyId}`, {headers: {"Authorization": `Bearer ${token}`}})
             .then(() => navigate("/home"))
             .catch(error => console.log("Error while deleting property, error = " + error.message))
     }
     const handleDeleteOnClick = () => {
-        deleteEmployeeById();
+        if (propertyDetails.status === "PENDING") {
+            alert("Property can't be deleted in PENDING state!")
+        } else {
+            deletePropertyById();
+        }
     }
 
     const handleMakeOffer = () => {
@@ -56,7 +57,6 @@ function PropertyDetails() {
             navigate('/login')
         }
         handleShow();
-
     }
 
     const handleClose = () => setShow(false);
@@ -66,7 +66,7 @@ function PropertyDetails() {
     const markPropertyOffer = () => {
 
         handleClose();
-        if(isTokenExpired(token)) {
+        if (isTokenExpired(token)) {
             logoutAuthState(user);
             navigate('/')
         }
@@ -80,18 +80,17 @@ function PropertyDetails() {
 
         };
 
-        axios.post(OFFER_URL + "", requestBody, {headers: getAuthHeader(token)}
+        axios.post(OFFER_URL, requestBody, {headers: getAuthHeader(token)}
         )
             .then(response => {
                 console.log(response);
-                navigate("/")
+                navigate("/my-offers")
             })
             .catch(error => {
                 console.log(error);
             })
 
     }
-
 
     return (
         <>
@@ -114,8 +113,10 @@ function PropertyDetails() {
                         <br/>
                     </>
                 ) : (
-                    <button onClick={handleMakeOffer}>Make an Offer</button>
-
+                    <>
+                        <UserDetails userId={propertyDetails.ownerUserId}/>
+                        <button onClick={handleMakeOffer}>Make an Offer</button>
+                    </>
                 )}
                 <h3><Link to="/home" className="link">Back</Link></h3>
             </div>

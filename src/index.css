@@ -31,6 +31,22 @@ code {
     color: #282c34;
 }
 
+.Content button {
+    margin: 5px;
+    padding: 10px;
+    font: inherit;
+    border: 2px solid whitesmoke;
+    background-color: transparent;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.Content button:hover,
+.Content button:active {
+    color: #282c34;
+    background-color: whitesmoke;
+}
+
 .Property {
     display: flex;
     flex-flow: row wrap;
