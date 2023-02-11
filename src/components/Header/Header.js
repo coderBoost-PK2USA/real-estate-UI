@@ -38,6 +38,12 @@ const Header = () => {
                             <li><Link to="/add-property">Add New Property</Link></li>
                         )
                     }
+                    {isUserRole(currentUser, "CUSTOMER") &&
+                        (
+                            <li><Link to="/my-offers">My Offers</Link></li>
+                        )
+                    }
+
 
                     <li onClick={handleLogout}><Link to="#">Logout</Link></li>
 

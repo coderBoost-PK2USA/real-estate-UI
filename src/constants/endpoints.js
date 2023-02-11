@@ -6,4 +6,5 @@ export const OWNER_URL = `${BASE_URL_PROPERTY}/api/v1/owners`;
 export const CUSTOMER_URL = `${BASE_URL_PROPERTY}/api/v1/customers`;
 export const ADMIN_URL = `${BASE_URL_PROPERTY}/api/v1/admin`;
 export const PROPERTY_URL = `${BASE_URL_PROPERTY}/api/v1/properties`;
+export const OFFER_URL = `${BASE_URL_PROPERTY}/api/v1/offers`;
 

@@ -1,10 +1,13 @@
 import "./PropertyDetails.css"
 import {useNavigate, useParams} from "react-router";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import axios from "axios";
-import {PROPERTY_URL} from "../../constants/endpoints";
+import {OFFER_URL, PROPERTY_URL} from "../../constants/endpoints";
 import {Link} from "react-router-dom";
-
+import {getAuthHeader, initializeAuthState, isTokenExpired, isUserRole, logoutAuthState} from "../AuthServices/Auth";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function PropertyDetails() {
 
@@ -13,14 +16,26 @@ function PropertyDetails() {
     const params = useParams();
     const [propertyDetails, setPropertyDetails] = useState({});
     const propertyId = params.id;
+    const [user, setUser] = useState([]);
+    const [isLogin, setIsLogin] = useState(false);
+    const [show, setShow] = useState(false);
+    const refMakeOffer = useRef();
+
 
     const fetchPropertyById = () => {
+
         axios.get(`${PROPERTY_URL}/${propertyId}`, {headers: {"Authorization": `Bearer ${token}`}})
             .then(response => setPropertyDetails(response.data))
             .catch(error => console.log("Error while fetching property details, error = " + error.message))
     }
 
-    useEffect(() => fetchPropertyById(), [propertyId])
+    useEffect(() => {
+            initializeAuthState(token, setIsLogin, setUser);
+
+            fetchPropertyById();
+        }
+
+        , [propertyId])
 
     const handleManageOffers = () => {
         navigate(`/manage-property/${propertyId}/offers`)
@@ -35,6 +50,49 @@ function PropertyDetails() {
         deleteEmployeeById();
     }
 
+    const handleMakeOffer = () => {
+        if (!isLogin) {
+            alert('Login to Make an offer  to the owner');
+            navigate('/login')
+        }
+        handleShow();
+
+    }
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    // mark at DB
+    const markPropertyOffer = () => {
+
+        handleClose();
+        if(isTokenExpired(token)) {
+            logoutAuthState(user);
+            navigate('/')
+        }
+
+        const amount = refMakeOffer.current['offer-amount'].value;
+        const requestBody = {
+            customerId: user.userId,
+            ownerId: propertyDetails.ownerId,
+            propertyId: propertyId,
+            amount: amount
+
+        };
+
+        axios.post(OFFER_URL + "", requestBody, {headers: getAuthHeader(token)}
+        )
+            .then(response => {
+                console.log(response);
+                navigate("/")
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    }
+
+
     return (
         <>
             <div className="PropertyDetails">
@@ -47,15 +105,53 @@ function PropertyDetails() {
                 <label>{propertyDetails.status}</label>
                 <h5>Price: {propertyDetails.price}$</h5>
                 <h5>Address: {propertyDetails.address}</h5>
-                <button onClick={handleManageOffers}>Manage Offers</button>
-                <br/>
-                <button onClick={handleDeleteOnClick}>Delete Property</button>
-                <br/>
+
+                {isUserRole(user, 'OWNER') ? (
+                    <>
+                        <button onClick={handleManageOffers}>Manage Offers</button>
+                        <br/>
+                        <button onClick={handleDeleteOnClick}>Delete Property</button>
+                        <br/>
+                    </>
+                ) : (
+                    <button onClick={handleMakeOffer}>Make an Offer</button>
+
+                )}
                 <h3><Link to="/home" className="link">Back</Link></h3>
             </div>
+
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Make Offer</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form ref={refMakeOffer}>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Enter Amount in USD</Form.Label>
+                            <Form.Control name='offer-amount'
+                                          type="text"
+                                          placeholder="10000"
+                                          autoFocus
+                            />
+                        </Form.Group>
+
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={markPropertyOffer}>
+                        Offer
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+
         </>
     );
 
 }
 
-export default PropertyDetails
+export default PropertyDetails;

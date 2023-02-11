@@ -20,7 +20,7 @@ function CustomerProperties() {
     useEffect(() => fetchProperties(), []);
 
     const propertiesComponents = propertiesState.map(p =>
-        <Link to={`#`} key={p.id}>
+        <Link to={'/property-detail/'+p.id} key={p.id}>
             <Property id={p.id} key={p.id} name={p.name} category={p.category} price={p.price} address={p.address}
                       image={p.images[0]}
             />

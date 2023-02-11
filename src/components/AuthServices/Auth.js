@@ -41,7 +41,7 @@ export const getAuthHeader = (token) => {
 }
 
 // check token is expired or not before API calls
-export const isTokenExpired = (token, setCurrentUser) => {
+export const isTokenExpired = (token) => {
 
     if (!token) {
         return true;

@@ -7,6 +7,7 @@ import PropertyOffers from "../../containers/PropertyOffers/PropertyOffers";
 import OwnerDetail from "../../components/Owner/OwnerDetail";
 import PropertyDetails from "../../components/PropertyDetails/PropertyDetails";
 import NewProperty from "../../components/NewProperty/NewProperty";
+import CustomerOffer from "../../containers/PropertyOffers/CustomerOffers";
 
 function PageRoutes() {
 
@@ -20,6 +21,9 @@ function PageRoutes() {
         <Route path="/add-property" element={<NewProperty/>}></Route>
         <Route path="/manage-property/:id" element={<PropertyDetails/>}></Route>
         <Route path="/manage-property/:id/offers" element={<PropertyOffers/>}></Route>
+        <Route path="/property-detail/:id" element={<PropertyDetails/>}></Route>
+        <Route path="/my-offers" element={<CustomerOffer/>}></Route>
+
 
     </Routes>)
 }
