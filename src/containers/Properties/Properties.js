@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {initializeAuthState, isUserRole} from "../../components/AuthServices/Auth";
+import AdminDashboard from "../../components/Admin/AdminDashboard";
 
 function Properties() {
 
@@ -14,7 +15,7 @@ function Properties() {
     let component;
 
     if (isUserRole(user, "ADMIN")) {
-        component = <h1>ADMIN_COMPONENT</h1>
+        component = <AdminDashboard/>
     } else if (isUserRole(user, "OWNER")) {
         component = <h1>OWNER_COMPONENT</h1>
     } else {
