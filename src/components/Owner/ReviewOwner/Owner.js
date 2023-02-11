@@ -9,6 +9,7 @@ import axios from "axios";
 import {BASE_URL_PROPERTY, OWNER_URL, USER_URL} from "../../../constants/endpoints";
 import {useNavigate} from "react-router";
 
+
 export default function Owner(props) {
 
     const [isActive, setIsActive] = useState(false);
@@ -16,6 +17,7 @@ export default function Owner(props) {
     const [email, setEmail] = useState(false);
 
     const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -30,10 +32,12 @@ export default function Owner(props) {
 
     }
 
-    const getUserDetails = () => {
+
+    const getUserDetails = () =>{
 
         const axiosInstance = axios.create({
-            baseURL: USER_URL + "/" + props.userId
+            baseURL: USER_URL+"/"+props.userId
+
         });
         axiosInstance.interceptors.request.use(config => requestInterceptor(config, token));
         axiosInstance
@@ -55,6 +59,7 @@ export default function Owner(props) {
             .put('' + OWNER_URL, {
                 id: props.id,
                 status: !isActive ? "ACTIVE" : "INACTIVE"
+
             })
             .catch(error => {
                 console.error("Error updating database status: ", error);
@@ -64,6 +69,7 @@ export default function Owner(props) {
 
     const handleContactBtn = () => {
         window.location.href = 'mailto:' + email;
+
     };
 
     const handleViewDetailBtn = () => {
@@ -99,6 +105,7 @@ export default function Owner(props) {
                         <div className='table_cell' style={{"color": "lightcoral"}} onClick={handleViewDetailBtn}>View
                             Details</div>
                        </button>
+
 
                     ) : (
                         <Link to="#">

@@ -1,0 +1,32 @@
+.PropertyDetails {
+    width: 80%;
+    margin: 20px auto;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    text-align: center;
+}
+
+.PropertyDetails label, .PropertyDetails h3, .link {
+    display: block;
+    color: lightcoral;
+}
+
+.PropertyDetails img {
+   margin: 10px;
+}
+
+.PropertyDetails button {
+    margin: 5px 0;
+    padding: 10px;
+    font: inherit;
+    border: 1px solid lightcoral;
+    background-color: transparent;
+    color: lightcoral;
+    cursor: pointer;
+}
+
+.PropertyDetails button:hover,
+.PropertyDetails button:active {
+    color: white;
+    background-color: lightcoral;
+}

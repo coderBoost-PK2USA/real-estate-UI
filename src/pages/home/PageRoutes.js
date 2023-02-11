@@ -5,6 +5,8 @@ import Login from "../../components/Login/Login";
 import ReviewOwnerList from "../../components/Owner/ReviewOwner/ReviewOwnerList";
 import PropertyOffers from "../../containers/PropertyOffers/PropertyOffers";
 import OwnerDetail from "../../components/Owner/OwnerDetail";
+import PropertyDetails from "../../components/PropertyDetails/PropertyDetails";
+import NewProperty from "../../components/NewProperty/NewProperty";
 
 function PageRoutes() {
 
@@ -15,7 +17,10 @@ function PageRoutes() {
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/review-owners" element={<ReviewOwnerList/>}></Route>
         <Route path="/review-detail/:id" element={<OwnerDetail/>}></Route>
-        <Route path="/property-offers" element={<PropertyOffers/>}></Route>
+        <Route path="/add-property" element={<NewProperty/>}></Route>
+        <Route path="/manage-property/:id" element={<PropertyDetails/>}></Route>
+        <Route path="/manage-property/:id/offers" element={<PropertyOffers/>}></Route>
+
     </Routes>)
 }
 

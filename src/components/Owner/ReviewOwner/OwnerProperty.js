@@ -28,10 +28,12 @@ function OwnerProperty(props) {
             <h2>Category: {props.cat}</h2>
             <input type="button" value={props.status}/>
             <h3>PRICE: {props.price}</h3>
+
             <p>Address: {props.address}</p>
+        </div>
+    );
 
-
-        </div>);
 }
 
 export default OwnerProperty;
+

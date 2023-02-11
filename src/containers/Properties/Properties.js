@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import {initializeAuthState, isUserRole} from "../../components/AuthServices/Auth";
 import AdminDashboard from "../../components/Admin/AdminDashboard";
+import OwnerProperties from "./OwnerProperties";
+import CustomerProperties from "./CustomerProperties";
 
 function Properties() {
 
@@ -17,14 +19,14 @@ function Properties() {
     if (isUserRole(user, "ADMIN")) {
         component = <AdminDashboard/>
     } else if (isUserRole(user, "OWNER")) {
-        component = <h1>OWNER_COMPONENT</h1>
+        component = <OwnerProperties/>
     } else {
-        component = <h1>DEFAULT</h1>
+        component = <CustomerProperties/>
     }
 
     return (
         <>
-            <h2>Properties Page , Uer {(user.roles) ? user.roles : "viewer"} Role</h2>
+            <h5>Logged in as {(user.roles) ? user.roles : "VIEWER"}</h5>
             {component}
         </>
     )

@@ -21,7 +21,8 @@ export const logoutAuthState = (setCurrentUser) => {
     setCurrentUser([]);
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
-
+    localStorage.removeItem("ownerId")
+    localStorage.removeItem("ownerStatus")
 }
 
 
@@ -34,10 +35,9 @@ export const isUserRole = (user, role) => {
 
 export const getAuthHeader = (token) => {
     return {
-        'Authorization': 'Bearer '+token,
+        'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json'
     };
-
 }
 
 // check token is expired or not before API calls
