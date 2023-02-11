@@ -1,5 +1,4 @@
 import "./ReviewOwner/OwnerReview.css"
-import {useState} from "react";
 
 function Owner(props) {
 
