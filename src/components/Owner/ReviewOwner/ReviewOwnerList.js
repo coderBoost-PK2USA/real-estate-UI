@@ -2,7 +2,6 @@ import axios from "axios";
 import {OWNER_URL} from "../../../constants/endpoints";
 import {useContext, useEffect, useState} from "react";
 import Owner from "./Owner";
-import List from "@mui/material/List";
 import {useNavigate} from "react-router";
 import {CurrentUserContext} from "../../../Context/CurrentUserContext";
 import {requestInterceptor, responseReviewOwners} from "../../../Apis/owners-api-interceptors";
@@ -50,6 +49,8 @@ const ReviewOwnerList = () => {
                     st={o.street}
                     statee={o.state}
                     zipcode={o.zipCode}
+                    hasProperties={o.hasProperties}
+
 
                 />
             </>
@@ -73,5 +74,6 @@ const ReviewOwnerList = () => {
             </div>
     </div>;
 }
+
 
 export default ReviewOwnerList;

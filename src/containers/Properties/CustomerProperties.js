@@ -2,7 +2,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {PROPERTY_URL} from "../../constants/endpoints";
 import {Link} from "react-router-dom";
-import Property from "../../components/Property/Property";
+import Property from "../../components/Property/Prooerty";
 
 function CustomerProperties() {
 
