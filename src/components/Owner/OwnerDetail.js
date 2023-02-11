@@ -4,7 +4,7 @@ import axios from "axios";
 import {OWNER_URL} from "../../constants/endpoints";
 import {requestInterceptor} from "../../Apis/owners-api-interceptors";
 import {useEffect, useState} from "react";
-import Property from "../Property/Property";
+import OwnerProperty from "./ReviewOwner/OwnerProperty";
 import './OwnerDetails.css'
 import {Link} from "react-router-dom";
 
@@ -53,7 +53,7 @@ const OwnerDetail = (props) => {
 
             <Link to="#">
                 <div>
-                    <Property
+                    <OwnerProperty
 
                         name={p.name}
                         detail={p.detail}

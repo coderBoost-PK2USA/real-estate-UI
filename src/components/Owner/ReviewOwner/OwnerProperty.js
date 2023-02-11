@@ -1,7 +1,7 @@
-import './Property.css'
+import './OwnerProperty.css'
 import {useState} from "react";
 
-function Property(props) {
+function OwnerProperty(props) {
 
     const [showAll, setShowAll] = useState(false);
     const handleShowAllBtn = () => {
@@ -34,4 +34,4 @@ function Property(props) {
         </div>);
 }
 
-export default Property;
+export default OwnerProperty;

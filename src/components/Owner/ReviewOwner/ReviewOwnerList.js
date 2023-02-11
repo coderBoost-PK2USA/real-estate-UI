@@ -44,6 +44,7 @@ const ReviewOwnerList = () => {
                 <Owner
                     id={o.id}
                     sr={++sr}
+                    userId={o.userId}
                     name={o.name}
                     status={o.status}
                     st={o.street}
@@ -57,7 +58,7 @@ const ReviewOwnerList = () => {
 
 
     return <div class="review-owner">
-        Review Owner
+        <h1>Review Owners</h1>
             <div className="table" id="results">
                 <div className='theader'>
                     <div className='table_header'>Sr.</div>

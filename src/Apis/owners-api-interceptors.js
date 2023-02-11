@@ -6,13 +6,10 @@ export const requestInterceptor = (config, token) => {
     if (token) {
         config.headers = getAuthHeader(token);
     }
-
-    console.log(config);
     return config;
 };
 
 export const responseReviewOwners = (error, setCurrentUser, navigate) => {
-    console.log(error);
     logoutAuthState(setCurrentUser);
     navigate("/");
     return Promise.reject(error);
