@@ -8,13 +8,14 @@ import {Link} from "react-router-dom";
 
 function PropertyDetails() {
 
+    const token = localStorage.getItem("token")
     const navigate = useNavigate()
     const params = useParams();
     const [propertyDetails, setPropertyDetails] = useState({});
     const propertyId = params.id;
 
     const fetchPropertyById = () => {
-        axios.get(`${PROPERTY_URL}/${propertyId}`)
+        axios.get(`${PROPERTY_URL}/${propertyId}`, {headers: {"Authorization": `Bearer ${token}`}})
             .then(response => setPropertyDetails(response.data))
             .catch(error => console.log("Error while fetching property details, error = " + error.message))
     }
@@ -22,7 +23,7 @@ function PropertyDetails() {
     useEffect(() => fetchPropertyById(), [propertyId])
 
     const deleteEmployeeById = () => {
-        axios.delete(`${PROPERTY_URL}/${propertyId}`)
+        axios.delete(`${PROPERTY_URL}/${propertyId}`, {headers: {"Authorization": `Bearer ${token}`}})
             .then(() => navigate("/home"))
             .catch(error => console.log("Error while deleting property, error = " + error.message))
     }
@@ -34,9 +35,9 @@ function PropertyDetails() {
         <>
             <div className="PropertyDetails">
                 <h3>Property Details</h3>
-                { (propertyDetails.images) ? propertyDetails.images.forEach(i=>
+                {(propertyDetails.images) ? propertyDetails.images.forEach(i =>
                     <img src={require('../../images/property.jpg')} id={i.id} width={300} height={250}/>
-                ): null}
+                ) : null}
                 <img src={require('../../images/property.jpg')} width={300} height={250}/>
                 <h6>Name: {propertyDetails.name}</h6>
                 <h6>Category: {propertyDetails.category}</h6>

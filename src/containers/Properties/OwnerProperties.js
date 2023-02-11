@@ -14,8 +14,11 @@ function OwnerProperties() {
     const fetchOwnerByUserId = () => {
         axios.get(`${OWNER_URL}/userid/${currentUser.userId}`, {headers: {"Authorization": `Bearer ${token}`}})
             .then(response => {
+                //TODO: Use useContext instead of local storage here
                 localStorage.setItem("ownerId", response.data.id)
-                fetchOwnerProperties(response.data.id)
+                localStorage.setItem("ownerStatus", response.data.status)
+                if (response.data.status === "ACTIVE")
+                    fetchOwnerProperties(response.data.id)
             })
             .catch(error => console.log("Error while fetching owner by userId, error = " + error.message))
     }
@@ -29,7 +32,7 @@ function OwnerProperties() {
             .catch(error => console.log("Error while fetching properties for owner, error = " + error.message))
     }
 
-    let propertiesComponents = null
+    let propertiesComponents = <h1>Please wait till ADMIN accept your account request!</h1>
     if (ownerDetailsState.propertyDetails !== undefined) {
         propertiesComponents = ownerDetailsState.propertyDetails.properties.map(p =>
             <Link to={`/manage-property/${p.id}`} key={p.id}>

@@ -8,6 +8,7 @@ import {PROPERTY_URL} from "../../constants/endpoints";
 function NewProperty() {
 
     const token = localStorage.getItem("token");
+    const ownerStatus = localStorage.getItem("ownerStatus")
     const navigate = useNavigate();
     const newPropertyForm = useRef();
 
@@ -21,8 +22,6 @@ function NewProperty() {
         console.log(images)
         const form = newPropertyForm.current;
         const ownerId = localStorage.getItem("ownerId")
-
-        console.log(ownerId)
 
         const propertyData = {
             name: form['name'].value,
@@ -48,60 +47,61 @@ function NewProperty() {
             })
     }
 
-    return (
-        <div className="NewProperty">
-            <form ref={newPropertyForm}>
-                <h3>Add New Property</h3>
+    return (<>
+            {(ownerStatus === "ACTIVE") ? <div className="NewProperty">
+                <form ref={newPropertyForm}>
+                    <h3>Add New Property</h3>
 
-                <label>Building Name:</label>
-                <input type="text"
-                       label={'name'}
-                       name={'name'}
-                />
+                    <label>Building Name:</label>
+                    <input type="text"
+                           label={'name'}
+                           name={'name'}
+                    />
 
-                <label>Details:</label>
-                <input type="test"
-                       label={'detail'}
-                       name={'detail'}
-                />
+                    <label>Details:</label>
+                    <input type="test"
+                           label={'detail'}
+                           name={'detail'}
+                    />
 
-                <label>Category:</label>
-                <select name={'category'} label={'category'}>
-                    <option value="HOUSE">HOUSE</option>
-                    <option value="APARTMENT">APARTMENT</option>
-                    <option value="RESIDENTIAL">RESIDENTIAL</option>
-                    <option value="COMMERCIAL">COMMERCIAL</option>
-                </select>
+                    <label>Category:</label>
+                    <select name={'category'} label={'category'}>
+                        <option value="HOUSE">HOUSE</option>
+                        <option value="APARTMENT">APARTMENT</option>
+                        <option value="RESIDENTIAL">RESIDENTIAL</option>
+                        <option value="COMMERCIAL">COMMERCIAL</option>
+                    </select>
 
-                <label>Price ($):</label>
-                <input type="text"
-                       label={'price'}
-                       name={'price'}
-                />
+                    <label>Price ($):</label>
+                    <input type="text"
+                           label={'price'}
+                           name={'price'}
+                    />
 
-                <label>Complete Address:</label>
-                <input type="text"
-                       label={'address'}
-                       name={'address'}
-                />
+                    <label>Complete Address:</label>
+                    <input type="text"
+                           label={'address'}
+                           name={'address'}
+                    />
 
-                <label>Latitude:</label>
-                <input type="text"
-                       label={'latitude'}
-                       name={'latitude'}
-                />
+                    <label>Latitude:</label>
+                    <input type="text"
+                           label={'latitude'}
+                           name={'latitude'}
+                    />
 
-                <label>Longitude:</label>
-                <input type="text"
-                       label={'longitude'}
-                       name={'longitude'}
-                />
+                    <label>Longitude:</label>
+                    <input type="text"
+                           label={'longitude'}
+                           name={'longitude'}
+                    />
 
-                <label>Upload Property Images:</label>
-                <input type="file" multiple onChange={handleImageChange}/>
-            </form>
-            <button onClick={addNewProperty}>Add Property</button>
-        </div>
+                    <label>Upload Property Images:</label>
+                    <input type="file" multiple onChange={handleImageChange}/>
+                </form>
+                <button onClick={addNewProperty}>Add Property</button>
+            </div> : <h1>Please wait till ADMIN accept your account request!</h1>}
+        </>
     )
         ;
 }
