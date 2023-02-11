@@ -1,5 +1,5 @@
 import Owner from "./Owner";
-import {useNavigate, useParams} from "react-router";
+import {useLocation, useNavigate, useParams} from "react-router";
 import axios from "axios";
 import {OWNER_URL} from "../../constants/endpoints";
 import {requestInterceptor} from "../../Apis/owners-api-interceptors";
@@ -18,12 +18,14 @@ const OwnerDetail = (props) => {
 
     const [propertyDetails, setPropertyDetails] = useState([]);
 
-    //  TODO: HAVE TO CHANGE THIS STATIC VALUE
-    const id = 1001;
-    console.log(id);
+
+    const location = useLocation();
 
 
     useEffect(() => {
+
+        const id = location.state.id;
+
         const axiosInstance = axios.create({
             baseURL: OWNER_URL + "/" + id
         });
@@ -70,7 +72,8 @@ const OwnerDetail = (props) => {
 
     });
 
-    return (<>OWNER DETAIL
+    return (<>
+        <h1>OWNER DETAIL</h1>
             <div>
                 <Owner
                     name={owner.name}

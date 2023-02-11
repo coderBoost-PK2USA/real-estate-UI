@@ -50,6 +50,8 @@ const ReviewOwnerList = () => {
                     st={o.street}
                     statee={o.state}
                     zipcode={o.zipCode}
+                    hasProperties={o.hasProperties}
+
 
                 />
             </>
