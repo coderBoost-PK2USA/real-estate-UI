@@ -12,7 +12,6 @@ export const requestInterceptor = (config, token) => {
 };
 
 export const responseReviewOwners = (error, setCurrentUser, navigate) => {
-    console.log(error);
     logoutAuthState(setCurrentUser);
     navigate("/");
     return Promise.reject(error);
