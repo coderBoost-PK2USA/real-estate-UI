@@ -34,11 +34,8 @@ const Header = () => {
                     )}
 
                     {isUserRole(currentUser, "OWNER") &&
-                        (<>
-                                <li><Link to="/add-property">Add New Property</Link></li>
-                                <li><Link to="/property-offers">Offers</Link></li>
-
-                            </>
+                        (
+                            <li><Link to="/add-property">Add New Property</Link></li>
                         )
                     }
 

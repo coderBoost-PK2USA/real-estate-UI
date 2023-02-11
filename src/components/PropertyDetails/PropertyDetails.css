@@ -6,45 +6,27 @@
     text-align: center;
 }
 
-.Edit {
-
-}
-
-.Edit label {
+.PropertyDetails label, .PropertyDetails h3, .link {
     display: block;
-    color: grey;
+    color: lightcoral;
 }
 
-.Edit button {
-    border: none;
+.PropertyDetails img {
+   margin: 10px;
+}
+
+.PropertyDetails button {
+    margin: 5px 0;
+    padding: 10px;
+    font: inherit;
+    border: 1px solid lightcoral;
     background-color: transparent;
+    color: lightcoral;
     cursor: pointer;
-    outline: none;
-    color: #fa923f;
 }
 
-.Edit button:hover,
-.Edit button:active {
-    color: #521751;
+.PropertyDetails button:hover,
+.PropertyDetails button:active {
+    color: white;
+    background-color: lightcoral;
 }
-
-.Edit button.Delete {
-    color: red;
-}
-
-.Edit button.Delete:hover,
-.Edit button.Delete:active {
-    color: darkred;
-}
-
-.Spec button {
-    background: none!important;
-    border: none;
-    padding: 0!important;
-    /*optional*/
-    font-family: arial, sans-serif;
-    /*input has OS specific font-family*/
-    color: #069;
-    text-decoration: underline;
-    cursor: pointer;
-  }

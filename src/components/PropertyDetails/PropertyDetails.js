@@ -22,6 +22,10 @@ function PropertyDetails() {
 
     useEffect(() => fetchPropertyById(), [propertyId])
 
+    const handleManageOffers = () => {
+        navigate(`/manage-property/${propertyId}/offers`)
+    }
+
     const deleteEmployeeById = () => {
         axios.delete(`${PROPERTY_URL}/${propertyId}`, {headers: {"Authorization": `Bearer ${token}`}})
             .then(() => navigate("/home"))
@@ -35,19 +39,19 @@ function PropertyDetails() {
         <>
             <div className="PropertyDetails">
                 <h3>Property Details</h3>
-                {(propertyDetails.images) ? propertyDetails.images.forEach(i =>
-                    <img src={require('../../images/property.jpg')} id={i.id} width={300} height={250}/>
-                ) : null}
-                <img src={require('../../images/property.jpg')} width={300} height={250}/>
-                <h6>Name: {propertyDetails.name}</h6>
-                <h6>Category: {propertyDetails.category}</h6>
-                <h6>Detail: {propertyDetails.detail}</h6>
-                <h6 className="info">{propertyDetails.status}</h6>
-                <h6>Price: {propertyDetails.price}$</h6>
-                <h6>{propertyDetails.address}</h6>
+                <img src={require('../../images/property.jpg')} width={400} height={350}/>
+                <img src={require('../../images/property-2.jpeg')} width={400} height={350}/>
+                <h5>Name: {propertyDetails.name}</h5>
+                <h5>Category: {propertyDetails.category}</h5>
+                <h5>Detail: {propertyDetails.detail}</h5>
+                <label>{propertyDetails.status}</label>
+                <h5>Price: {propertyDetails.price}$</h5>
+                <h5>Address: {propertyDetails.address}</h5>
+                <button onClick={handleManageOffers}>Manage Offers</button>
+                <br/>
                 <button onClick={handleDeleteOnClick}>Delete Property</button>
                 <br/>
-                <Link to="/home">Back</Link>
+                <h3><Link to="/home" className="link">Back</Link></h3>
             </div>
         </>
     );

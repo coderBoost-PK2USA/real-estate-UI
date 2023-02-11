@@ -19,7 +19,8 @@ function PageRoutes() {
         <Route path="/review-detail/:id" element={<OwnerDetail/>}></Route>
         <Route path="/add-property" element={<NewProperty/>}></Route>
         <Route path="/manage-property/:id" element={<PropertyDetails/>}></Route>
-        <Route path="/property-offers" element={<PropertyOffers/>}></Route>
+        <Route path="/manage-property/:id/offers" element={<PropertyOffers/>}></Route>
+
     </Routes>)
 }
 
