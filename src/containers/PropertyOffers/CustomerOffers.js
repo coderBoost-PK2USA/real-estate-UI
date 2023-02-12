@@ -15,23 +15,7 @@ const CustomerOffer = () => {
     const [offers, setOffers] = useContext(CustomerOffersContext);
     const [isLogin, setIsLogin] = useState(false);
     const navigate = useNavigate();
-    const offersListRef = useRef();
 
-    const handleGeneratePdf = () => {
-        const doc = new jsPDF({
-            format: 'a1',
-            unit: 'px',
-        });
-
-        // Adding the fonts.
-        doc.setFont('Inter-Regular', 'normal');
-
-        doc.html(offersListRef.current, {
-            async callback(doc) {
-                await doc.save('document');
-            },
-        });
-    };
 
 
     useEffect(() => {
@@ -80,8 +64,7 @@ const CustomerOffer = () => {
     return (
         <>
             <h1>My Offers</h1>
-            <button onClick={handleGeneratePdf }>Download PDF</button>
-            <div className="history-offer" ref={offersListRef}>
+            <div className="history-offer" >
                 <div>
                 {offersList}
                 </div>

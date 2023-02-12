@@ -1,14 +1,34 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import axios from "axios";
 import {CUSTOMER_URL, OFFER_URL} from "../../constants/endpoints";
 import {getAuthHeader} from "../AuthServices/Auth";
 import {useNavigate} from "react-router";
+import jsPDF from "jspdf";
 
 const HistoryOffers = (props) => {
     const [selectedStatus, setSelectedStatus] = useState(props.offerStatus);
     const navigate = useNavigate();
+    const offersListRef = useRef();
+
 
     const token = localStorage.getItem('token')
+
+    const handleGeneratePdf = () => {
+        const doc = new jsPDF({
+            format: 'a1',
+            unit: 'px',
+        });
+
+        // Adding the fonts.
+        doc.setFont('Inter-Regular', 'normal');
+
+        doc.html(offersListRef.current, {
+            async callback(doc) {
+                await doc.save('document');
+            },
+        });
+    };
+
 
     const changeOfferStatus = (e) => {
         if (props.offerStatus === 'ACCEPTED') {
@@ -31,7 +51,7 @@ const HistoryOffers = (props) => {
     }
 
     return (
-        <div className="Content" style={{width: 'auto'}}>
+        <div className="Content" style={{width: 'auto'}} ref={offersListRef}>
             <img
                 style={{width: '30%'}}
                 src="https://yardzen.com/wp-content/uploads/2022/07/Modern-Farmhouse_Kate-Derby.jpg"
@@ -47,7 +67,12 @@ const HistoryOffers = (props) => {
                         <option value="CANCELED">CANCEL</option>
                     </select>
 
+
                 </>
+            )}
+            {props.offerStatus === 'ACCEPTED' && (
+                <button onClick={handleGeneratePdf }>Download PDF</button>
+
             )}
             <p id={props.ownerId}>OWNER: {props.ownerName}</p>
         </div>
