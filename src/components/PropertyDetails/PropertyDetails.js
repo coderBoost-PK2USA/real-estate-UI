@@ -1,6 +1,6 @@
 import "./PropertyDetails.css"
 import {useNavigate, useParams} from "react-router";
-import {useEffect, useRef, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {OFFER_URL, PROPERTY_URL} from "../../constants/endpoints";
 import {Link} from "react-router-dom";
@@ -9,6 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import UserDetails from "../UserDetails/UserDetails";
+import {CustomerOffersContext} from "../../Context/CustomerOffersContext";
 
 function PropertyDetails() {
 
@@ -21,6 +22,7 @@ function PropertyDetails() {
     const [isLogin, setIsLogin] = useState(false);
     const [show, setShow] = useState(false);
     const refMakeOffer = useRef();
+    const [offers, setOffers] = useContext(CustomerOffersContext);
 
 
     const fetchPropertyById = () => {
@@ -53,10 +55,14 @@ function PropertyDetails() {
 
     const handleMakeOffer = () => {
         if (!isLogin) {
-            alert('Login to Make an offer  to the owner');
+            alert('Login to Make an offer to the owner');
             navigate('/login')
         }
-        handleShow();
+        if (!isOfferAlreadyMade())
+            handleShow();
+        else {
+            alert("You already Offered the Owner for this Property!");
+        }
     }
 
     const handleClose = () => setShow(false);
@@ -92,6 +98,11 @@ function PropertyDetails() {
 
     }
 
+    const isOfferAlreadyMade = () => {
+        console.log("**************************")
+        return offers.some(o => o.propertyName === propertyDetails.name && o.ownerUserId === propertyDetails.ownerUserId)
+    }
+
     return (
         <>
             <div className="PropertyDetails">
@@ -115,7 +126,7 @@ function PropertyDetails() {
                 ) : (
                     <>
                         <UserDetails userId={propertyDetails.ownerUserId}/>
-                        <button onClick={handleMakeOffer}>Make an Offer</button>
+                        <button onClick={handleMakeOffer}> {isOfferAlreadyMade() ? "Offered" : "Make an Offer"}</button>
                     </>
                 )}
                 <h3><Link to="/home" className="link">Back</Link></h3>
