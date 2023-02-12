@@ -6,6 +6,9 @@ import Property from "../../components/Property/Prooerty";
 import {getAuthHeader, initializeAuthState, isUserRole} from "../../components/AuthServices/Auth";
 import {CurrentUserContext} from "../../Context/CurrentUserContext";
 import {CustomerOffersContext} from "../../Context/CustomerOffersContext";
+import {useEffect, useState} from "react";
+import {PROPERTY_URL} from "../../constants/endpoints";
+import Property from "../../components/Property/Property";
 
 function CustomerProperties() {
 
@@ -34,11 +37,9 @@ function CustomerProperties() {
     }, []);
 
     const propertiesComponents = propertiesState.map(p =>
-        <Link to={`/property-detail/${p.id}`} key={p.id}>
-            <Property id={p.id} key={p.id} name={p.name} category={p.category} price={p.price} address={p.address}
-                      image={p.images[0]}
-            />
-        </Link>
+        <Property id={p.id} key={p.id} name={p.name} category={p.category} price={p.price} address={p.address}
+                  image={p.images[0]}
+        />
     );
 
     return (

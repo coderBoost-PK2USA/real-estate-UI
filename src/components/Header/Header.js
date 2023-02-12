@@ -40,7 +40,11 @@ const Header = () => {
                     }
                     {isUserRole(currentUser, "CUSTOMER") &&
                         (
-                            <li><Link to="/my-offers">My Offers</Link></li>
+                            <>
+                                <li><Link to="/my-offers">My Offers</Link></li>
+                                <li><Link to="/wishlist">Wishlist</Link></li>
+                            </>
+
                         )
                     }
 
