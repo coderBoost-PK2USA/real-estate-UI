@@ -2,12 +2,9 @@ import axios from "axios";
 import {useContext, useEffect, useState} from "react";
 import {CUSTOMER_URL, PROPERTY_URL} from "../../constants/endpoints";
 import {Link} from "react-router-dom";
-import Property from "../../components/Property/Prooerty";
 import {getAuthHeader, initializeAuthState, isUserRole} from "../../components/AuthServices/Auth";
 import {CurrentUserContext} from "../../Context/CurrentUserContext";
 import {CustomerOffersContext} from "../../Context/CustomerOffersContext";
-import {useEffect, useState} from "react";
-import {PROPERTY_URL} from "../../constants/endpoints";
 import Property from "../../components/Property/Property";
 
 function CustomerProperties() {
