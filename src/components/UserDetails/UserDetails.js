@@ -18,7 +18,7 @@ function UserDetails(props) {
         fetchUserById();
     }, [userId, token])
 
-    const mailtoHref = `mailto:${userDetails.email}?subject=Query Regarding Property&body=Hello Mr/Ms. ${userDetails.name}, I am ______`;
+    const mailtoHref = `mailto:${userDetails.email}?subject=Query/Update Regarding Property Buying&body=Hello Mr/Ms. ${userDetails.name}, I am ______`;
 
     return (
         <>

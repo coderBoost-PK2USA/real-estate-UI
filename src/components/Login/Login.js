@@ -20,21 +20,18 @@ function Login() {
         }
 
         try {
-
             const response = await axios.post(AUTH_URL, data);
-            console.log(response)
 
             localStorage.setItem('token', response.data.accessToken);
             localStorage.setItem('refreshToken', response.data.refreshToken);
             setCurrentUser(response.data);
+
             alert('Login Successful!');
             navigate("/Home");
 
         } catch (error) {
             alert("Invalid Credentials!");
         }
-
-
     }
 
     return (

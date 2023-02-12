@@ -1,8 +1,7 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {PROPERTY_URL} from "../../constants/endpoints";
-import {Link} from "react-router-dom";
-import Property from "../../components/Property/Prooerty";
+import Property from "../../components/Property/Property";
 
 function CustomerProperties() {
 
@@ -20,11 +19,9 @@ function CustomerProperties() {
     useEffect(() => fetchProperties(), []);
 
     const propertiesComponents = propertiesState.map(p =>
-        <Link to={`/property-detail/${p.id}`} key={p.id}>
-            <Property id={p.id} key={p.id} name={p.name} category={p.category} price={p.price} address={p.address}
-                      image={p.images[0]}
-            />
-        </Link>
+        <Property id={p.id} key={p.id} name={p.name} category={p.category} price={p.price} address={p.address}
+                  image={p.images[0]}
+        />
     );
 
     return (

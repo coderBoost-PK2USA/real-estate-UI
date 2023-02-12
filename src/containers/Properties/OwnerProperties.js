@@ -3,7 +3,7 @@ import {useContext, useEffect, useState} from "react";
 import {OWNER_URL} from "../../constants/endpoints";
 import {CurrentUserContext} from "../../Context/CurrentUserContext";
 import {Link} from "react-router-dom";
-import Property from "../../components/Property/Prooerty";
+import Property from "../../components/Property/Property";
 
 function OwnerProperties() {
 
