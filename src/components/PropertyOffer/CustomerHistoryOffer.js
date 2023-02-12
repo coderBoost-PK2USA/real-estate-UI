@@ -2,9 +2,11 @@ import {useState} from "react";
 import axios from "axios";
 import {CUSTOMER_URL, OFFER_URL} from "../../constants/endpoints";
 import {getAuthHeader} from "../AuthServices/Auth";
+import {useNavigate} from "react-router";
 
 const HistoryOffers = (props) => {
     const [selectedStatus, setSelectedStatus] = useState(props.offerStatus);
+    const navigate = useNavigate();
 
     const token = localStorage.getItem('token')
 

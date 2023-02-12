@@ -37,7 +37,7 @@ const CustomerOffer = () => {
     useEffect(() => {
         initializeAuthState(token, setIsLogin, setUser);
         fetchCustomerOffers();
-            }, []);
+            }, [offers]);
 
     const fetchCustomerOffers = () => {
 
