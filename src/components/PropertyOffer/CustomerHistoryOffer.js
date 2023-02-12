@@ -51,7 +51,7 @@ const HistoryOffers = (props) => {
     }
 
     return (
-        <div className="Content" style={{width: 'auto'}} ref={offersListRef}>
+        <div className="img-div" style={{width: 'auto'}} ref={offersListRef}>
             <img
                 style={{width: '30%'}}
                 src="https://yardzen.com/wp-content/uploads/2022/07/Modern-Farmhouse_Kate-Derby.jpg"

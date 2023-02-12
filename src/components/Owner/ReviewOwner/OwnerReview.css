@@ -149,12 +149,19 @@
 
 }
 
+.img-div{
+    color: lightcoral;
+    box-sizing: border-box;
+    border: lightcoral 2px solid;
 
+
+}
 
 .img-div img{
     width:50%;
     height:50%;
     objectFit: 'cover';
+    margin: 2%;
 
 }
 
@@ -163,5 +170,10 @@
 .img-div h1,p ,h2, h3{
     color: lightcoral;
 }
+
+/*.img-div h1:hover, .img-div p:hover, .img-div h2:hover, .img-div h3:hover {*/
+/*    color: white;*/
+/*}*/
+
 
 
