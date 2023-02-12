@@ -54,9 +54,10 @@ function Property(props) {
     const showPropertyDetails = () => {
         if (isLogin) {
             navigate(`/property-detail/${props.id}`)
+        }else {
+            alert('Login or Create your Account for property and owner details');
+            navigate('/login')
         }
-        alert('Login or Create your Account for property and owner details');
-        navigate('/login')
     }
 
     return (
