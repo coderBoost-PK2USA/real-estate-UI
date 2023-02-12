@@ -15,8 +15,6 @@ const AdminDashboard = () => {
 
 
     const fetchStatistics = () => {
-
-
         const axiosInstance = axios.create({
             baseURL: ADMIN_URL + "/dashboard"
         });
